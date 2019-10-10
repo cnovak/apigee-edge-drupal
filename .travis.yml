@@ -24,7 +24,7 @@ jobs:
       # Create a new stage to check coding standards that can run in sequence of test jobs.
     - stage: lint
       name: "Validate Coding Standards"
-      script: echo "docker-compose run php phpcs -p -s -n --colors --standard=/opt/drupal-module/phpcs.xml.dist /opt/drupal-module/"
+      script: docker-compose run php phpcs -p -s -n --colors --standard=/opt/drupal-module/phpcs.xml.dist /opt/drupal-module/
     - stage: test
       # Do not exit if a PHPUnit test fails, we would like to run everything from
       # after_* sections.

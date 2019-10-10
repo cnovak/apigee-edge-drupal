@@ -16,7 +16,12 @@ if [[ ! -f ${TESTRUNNER} ]]; then
   /opt/drupal-module/.travis/prepare-test-env.sh
 fi
 
-PHPUNIT="${WEB_ROOT_PARENT}/vendor/bin/phpunit -c ${WEB_ROOT}/core  --printer \Drupal\Tests\Listeners\HtmlOutputPrinter"
+PHPUNIT="${WEB_ROOT_PARENT}/vendor/bin/phpunit -c ${WEB_ROOT}/core"
+
+# Use \Drupal\Tests\Listeners\HtmlOutputPrinter when running tests.
+if [[ -n "${ENABLE_HTML_OUTPUT_PRINTER}" ]]; then
+  PHPUNIT="${PHPUNIT}" . " --printer \Drupal\Tests\Listeners\HtmlOutputPrinter"
+fi
 
 # Do not exit if any PHPUnit test fails.
 set +e
