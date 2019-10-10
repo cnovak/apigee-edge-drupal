@@ -24,7 +24,7 @@ set +e
 # If no argument passed start the testrunner and start running ALL tests
 # concurrently, otherwise pass them directly to PHPUnit.
 if [[ $# -eq 0 ]]; then
-  sudo -u root -E sudo -u www-data -E ${TESTRUNNER} -verbose -threads=${THREADS} -root=${WEB_ROOT}/${TEST_ROOT} -command="$PHPUNIT"
+  sudo -u root -E sudo -u www-data -E ${TESTRUNNER} -verbose -threads="${THREADS}" -root="${WEB_ROOT}"/"${TEST_ROOT}" -command="$PHPUNIT"
 else
-  sudo -u root -E sudo -u www-data -E ${PHPUNIT} ${@}
+  sudo -u root -E sudo -u www-data -E "${PHPUNIT}" "${@}"
 fi
