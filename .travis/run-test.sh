@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 set -e
+set -x
 
 # Register shared variables.
 export THREADS=${THREADS:-4}

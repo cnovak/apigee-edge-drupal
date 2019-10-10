@@ -28,7 +28,7 @@ jobs:
       # Do not exit if a PHPUnit test fails, we would like to run everything from
       # after_* sections.
       - set +e
-      - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then docker-compose run php /opt/drupal-module/.travis/run-test.sh; fi
+      - docker-compose run php /opt/drupal-module/.travis/run-test.sh; fi
 # Run the lint stage before starting tests. The test job is the default name for the matrix tests.
 stages:
   - lint
@@ -52,29 +52,29 @@ env:
 #  - DRUPAL_CORE=
   matrix:
     # Apigee Edge module tests.
-    - PHP_VERSION=7.1 DEPENDENCIES="--prefer-lowest" TEST_ROOT="modules/contrib/apigee_edge/tests"
+#    - PHP_VERSION=7.1 DEPENDENCIES="--prefer-lowest" TEST_ROOT="modules/contrib/apigee_edge/tests"
     - PHP_VERSION=7.1 DEPENDENCIES="" TEST_ROOT="modules/contrib/apigee_edge/tests"
     - PHP_VERSION=7.1 DEPENDENCIES="" TEST_ROOT="modules/contrib/apigee_edge/tests" DB_DRIVER=pgsql DB_IMAGE=wodby/postgres:9.6-1.3.1
     - PHP_VERSION=7.2 DEPENDENCIES="" TEST_ROOT="modules/contrib/apigee_edge/tests" PHP_IMAGE=wodby/drupal-php:7.2-dev-4.5.0
     - PHP_VERSION=7.1 DRUPAL_CORE=8.7.x-dev DEPENDENCIES="--prefer-lowest" TEST_ROOT="modules/contrib/apigee_edge/tests"
-    # Apigee Edge API product RBAC module tests.
-    - PHP_VERSION=7.1 DEPENDENCIES="--prefer-lowest" TEST_ROOT="modules/contrib/apigee_edge/modules/apigee_edge_apiproduct_rbac/tests"
-    - PHP_VERSION=7.1 DEPENDENCIES="" TEST_ROOT="modules/contrib/apigee_edge/modules/apigee_edge_apiproduct_rbac/tests"
-    - PHP_VERSION=7.1 DEPENDENCIES="" TEST_ROOT="modules/contrib/apigee_edge/modules/apigee_edge_apiproduct_rbac/tests" DB_DRIVER=pgsql DB_IMAGE=wodby/postgres:9.6-1.3.1
-    - PHP_VERSION=7.2 DEPENDENCIES="" TEST_ROOT="modules/contrib/apigee_edge/modules/apigee_edge_apiproduct_rbac/tests" PHP_IMAGE=wodby/drupal-php:7.2-dev-4.5.0
-    - PHP_VERSION=7.1 DRUPAL_CORE=8.7.x-dev DEPENDENCIES="--prefer-lowest" TEST_ROOT="modules/contrib/apigee_edge/modules/apigee_edge_apiproduct_rbac/tests"
-    # Apigee Edge Teams module tests.
-    - PHP_VERSION=7.1 DEPENDENCIES="--prefer-lowest" TEST_ROOT="modules/contrib/apigee_edge/modules/apigee_edge_teams/tests"
-    - PHP_VERSION=7.1 DEPENDENCIES="" TEST_ROOT="modules/contrib/apigee_edge/modules/apigee_edge_teams/tests"
-    - PHP_VERSION=7.1 DEPENDENCIES="" TEST_ROOT="modules/contrib/apigee_edge/modules/apigee_edge_teams/tests" DB_DRIVER=pgsql DB_IMAGE=wodby/postgres:9.6-1.3.1
-    - PHP_VERSION=7.2 DEPENDENCIES="" TEST_ROOT="modules/contrib/apigee_edge/modules/apigee_edge_teams/tests" PHP_IMAGE=wodby/drupal-php:7.2-dev-4.5.0
-    - PHP_VERSION=7.1 DRUPAL_CORE=8.7.x-dev DEPENDENCIES="--prefer-lowest" TEST_ROOT="modules/contrib/apigee_edge/modules/apigee_edge_teams/tests"
-    # Apigee Edge API Docs module tests.
-    - PHP_VERSION=7.1 DEPENDENCIES="--prefer-lowest" TEST_ROOT="modules/contrib/apigee_edge/modules/apigee_edge_apidocs/tests"
-    - PHP_VERSION=7.1 DEPENDENCIES="" TEST_ROOT="modules/contrib/apigee_edge/modules/apigee_edge_apidocs/tests"
-    - PHP_VERSION=7.1 DEPENDENCIES="" TEST_ROOT="modules/contrib/apigee_edge/modules/apigee_edge_apidocs/tests" DB_DRIVER=pgsql DB_IMAGE=wodby/postgres:9.6-1.3.1
-    - PHP_VERSION=7.2 DEPENDENCIES="" TEST_ROOT="modules/contrib/apigee_edge/modules/apigee_edge_apidocs/tests" PHP_IMAGE=wodby/drupal-php:7.2-dev-4.5.0
-    - PHP_VERSION=7.1 DRUPAL_CORE=8.7.x-dev DEPENDENCIES="--prefer-lowest" TEST_ROOT="modules/contrib/apigee_edge/modules/apigee_edge_apidocs/tests"
+#    # Apigee Edge API product RBAC module tests.
+#    - PHP_VERSION=7.1 DEPENDENCIES="--prefer-lowest" TEST_ROOT="modules/contrib/apigee_edge/modules/apigee_edge_apiproduct_rbac/tests"
+#    - PHP_VERSION=7.1 DEPENDENCIES="" TEST_ROOT="modules/contrib/apigee_edge/modules/apigee_edge_apiproduct_rbac/tests"
+#    - PHP_VERSION=7.1 DEPENDENCIES="" TEST_ROOT="modules/contrib/apigee_edge/modules/apigee_edge_apiproduct_rbac/tests" DB_DRIVER=pgsql DB_IMAGE=wodby/postgres:9.6-1.3.1
+#    - PHP_VERSION=7.2 DEPENDENCIES="" TEST_ROOT="modules/contrib/apigee_edge/modules/apigee_edge_apiproduct_rbac/tests" PHP_IMAGE=wodby/drupal-php:7.2-dev-4.5.0
+#    - PHP_VERSION=7.1 DRUPAL_CORE=8.7.x-dev DEPENDENCIES="--prefer-lowest" TEST_ROOT="modules/contrib/apigee_edge/modules/apigee_edge_apiproduct_rbac/tests"
+#    # Apigee Edge Teams module tests.
+#    - PHP_VERSION=7.1 DEPENDENCIES="--prefer-lowest" TEST_ROOT="modules/contrib/apigee_edge/modules/apigee_edge_teams/tests"
+#    - PHP_VERSION=7.1 DEPENDENCIES="" TEST_ROOT="modules/contrib/apigee_edge/modules/apigee_edge_teams/tests"
+#    - PHP_VERSION=7.1 DEPENDENCIES="" TEST_ROOT="modules/contrib/apigee_edge/modules/apigee_edge_teams/tests" DB_DRIVER=pgsql DB_IMAGE=wodby/postgres:9.6-1.3.1
+#    - PHP_VERSION=7.2 DEPENDENCIES="" TEST_ROOT="modules/contrib/apigee_edge/modules/apigee_edge_teams/tests" PHP_IMAGE=wodby/drupal-php:7.2-dev-4.5.0
+#    - PHP_VERSION=7.1 DRUPAL_CORE=8.7.x-dev DEPENDENCIES="--prefer-lowest" TEST_ROOT="modules/contrib/apigee_edge/modules/apigee_edge_teams/tests"
+#    # Apigee Edge API Docs module tests.
+#    - PHP_VERSION=7.1 DEPENDENCIES="--prefer-lowest" TEST_ROOT="modules/contrib/apigee_edge/modules/apigee_edge_apidocs/tests"
+#    - PHP_VERSION=7.1 DEPENDENCIES="" TEST_ROOT="modules/contrib/apigee_edge/modules/apigee_edge_apidocs/tests"
+#    - PHP_VERSION=7.1 DEPENDENCIES="" TEST_ROOT="modules/contrib/apigee_edge/modules/apigee_edge_apidocs/tests" DB_DRIVER=pgsql DB_IMAGE=wodby/postgres:9.6-1.3.1
+#    - PHP_VERSION=7.2 DEPENDENCIES="" TEST_ROOT="modules/contrib/apigee_edge/modules/apigee_edge_apidocs/tests" PHP_IMAGE=wodby/drupal-php:7.2-dev-4.5.0
+#    - PHP_VERSION=7.1 DRUPAL_CORE=8.7.x-dev DEPENDENCIES="--prefer-lowest" TEST_ROOT="modules/contrib/apigee_edge/modules/apigee_edge_apidocs/tests"
 matrix:
   allow_failures:
     - env: PHP_VERSION=7.1 DRUPAL_CORE=8.7.x-dev DEPENDENCIES="--prefer-lowest" TEST_ROOT="modules/contrib/apigee_edge/tests"
